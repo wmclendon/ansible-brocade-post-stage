@@ -1,0 +1,42 @@
+---
+- name: Brocade ICCX6450 Switch Post Staging
+  hosts: icx6450s
+  vars:
+    username: ansible
+    password: password
+    tftpServer: "192.168.1.151"
+    icx6450Bootrom: kxz10101.bin
+    logfileDirectory: "/var/log"
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Brocade ICX6450 Switch Post Staging
+      brocade_post_stage:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
+         bootrom="{{ icx6450Bootrom }}"
+         tftpServer="{{ tftpServer }}"
+         logfileDirectory="{{ logfileDirectory }}"
+
+- name: Brocade ICCX6610 Switch Post Staging
+  hosts: icx6610s
+  vars:
+    username: ansible
+    password: password
+    tftpServer: 192.168.1.151
+    icx6610Bootrom: grz10100.bin
+    logfileDirectory: "/var/log"
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Brocade ICX6610 Switch Post Staging
+      brocade_post_stage:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
+         bootrom="{{ icx6610Bootrom }}"
+         tftpServer="{{ tftpServer }}"
+         logfileDirectory="{{ logfileDirectory }}"
