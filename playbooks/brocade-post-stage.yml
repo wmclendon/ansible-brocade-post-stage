@@ -6,18 +6,30 @@
     password: password
     tftpServer: "192.168.1.151"
     icx6450Bootrom: kxz10101.bin
-    logfileDirectory: "/var/log"
+    logfileDirectory: "/tmp/log"
   connection: local
   gather_facts: no
 
   tasks:
-    - name: Brocade ICX6450 Switch Post Staging
-      brocade_post_stage:
+    - name: ICX6450--Generate SSH Key
+      brocade_generate_ssh_key:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
+         logfileDirectory="{{ logfileDirectory }}"
+    - name: ICX6450--Copy Bootrom
+      brocade_copy_bootrom:
          host="{{ inventory_hostname }}"
          username="{{ username }}"
          password="{{ password }}"
          bootrom="{{ icx6450Bootrom }}"
          tftpServer="{{ tftpServer }}"
+         logfileDirectory="{{ logfileDirectory }}"
+    - name: ICX6450--Copy Flash to Secondary
+      brocade_copy_flash_secondary:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
          logfileDirectory="{{ logfileDirectory }}"
 
 - name: Brocade ICCX6610 Switch Post Staging
@@ -27,16 +39,28 @@
     password: password
     tftpServer: 192.168.1.151
     icx6610Bootrom: grz10100.bin
-    logfileDirectory: "/var/log"
+    logfileDirectory: "/tmp/log"
   connection: local
   gather_facts: no
 
   tasks:
-    - name: Brocade ICX6610 Switch Post Staging
-      brocade_post_stage:
+    - name: ICX6610--Generate SSH Key
+      brocade_generate_ssh_key:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
+         logfileDirectory="{{ logfileDirectory }}"
+    - name: ICX6610--Copy Bootrom
+      brocade_copy_bootrom:
          host="{{ inventory_hostname }}"
          username="{{ username }}"
          password="{{ password }}"
          bootrom="{{ icx6610Bootrom }}"
          tftpServer="{{ tftpServer }}"
+         logfileDirectory="{{ logfileDirectory }}"
+    - name: ICX6610--Copy Flash to Secondary
+      brocade_copy_flash_secondary:
+         host="{{ inventory_hostname }}"
+         username="{{ username }}"
+         password="{{ password }}"
          logfileDirectory="{{ logfileDirectory }}"
