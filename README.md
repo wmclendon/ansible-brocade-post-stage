@@ -9,7 +9,7 @@ Files:
 - ansible.cfg contains an example Ansible config file
 - hosts file is an example hosts file that defines icx6450 and icx6610 switch IP addresses
 - example playbook itself is in playbooks/ directory as I believe this is normal practice for Ansible
-- the module is under playbooks/library/ -- again I believe this is normal practice for Ansible
+- the modules are under playbooks/library/ -- again I believe this is normal practice for Ansible
 
 Directory structure is such that (I believe) cloning the repo should allow it to be run directly with 'ansible-playbook playbooks/brocade-post-stage.yml'
 
@@ -20,4 +20,4 @@ Notes:
 
 - on my Mac with how Python was installed via Homebrew, python is actually at /usr/local/bin/python rather than the normal /usr/bin/python -- the repo has /usr/bin/python as I believe that should be the default.  Mac users may or may not need to change the python file to match their location for python
 
-- the Log Directory is mandatory right now, and its location and ability to be created is highly machine dependent, so please modify as required in the Playbook for each Play.  The repo uses /var/log/, however that does not seem to work on a Mac without sudo.
+- the Log Directory is mandatory right now, and its location and ability to be created is highly machine dependent, so please modify as required in the Playbook for each Play.  The repo uses /tmp/log/
