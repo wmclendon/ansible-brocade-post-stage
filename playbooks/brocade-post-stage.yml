@@ -5,7 +5,8 @@
     username: ansible
     password: password
     tftpServer: "192.168.1.151"
-    icx6450Bootrom: kxz10101.bin
+    softwareImage: ICX64R08030f.bin
+    icx6450Bootrom: kxz10105.bin
     logfileDirectory: "/tmp/log"
   connection: local
   gather_facts: no
@@ -25,9 +26,11 @@
          bootrom="{{ icx6450Bootrom }}"
          tftpServer="{{ tftpServer }}"
          logfileDirectory="{{ logfileDirectory }}"
-    - name: ICX6450--Copy Flash to Secondary
-      brocade_copy_flash_secondary:
+    - name: ICX6450--Copy TFTP to Secondary
+      brocade_copy_tftp_flash_secondary:
          host="{{ inventory_hostname }}"
+         tftpServer="{{ tftpServer }}"
+         softwareImage="{{ softwareImage }}"
          username="{{ username }}"
          password="{{ password }}"
          logfileDirectory="{{ logfileDirectory }}"
@@ -38,6 +41,7 @@
     username: ansible
     password: password
     tftpServer: 192.168.1.151
+    softwareImage: FCXR08030f.bin
     icx6610Bootrom: grz10100.bin
     logfileDirectory: "/tmp/log"
   connection: local
@@ -59,8 +63,10 @@
          tftpServer="{{ tftpServer }}"
          logfileDirectory="{{ logfileDirectory }}"
     - name: ICX6610--Copy Flash to Secondary
-      brocade_copy_flash_secondary:
+      brocade_copy_tftp_flash_secondary:
          host="{{ inventory_hostname }}"
+         tftpServer="{{ tftpServer }}"
+         softwareImage="{{ softwareImage }}"
          username="{{ username }}"
          password="{{ password }}"
          logfileDirectory="{{ logfileDirectory }}"
